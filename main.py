@@ -6,9 +6,9 @@ from telegram.ext import ApplicationBuilder
 
 TOKEN = '7197643700:AAGDeHtbql7ZykEzxCIEmLaoBDZAGwdlE-I'
 
-proxy_url = "socks5://user:pass@host:port"
-
-app = ApplicationBuilder().token(TOKEN).proxy_url(proxy_url).build()
+# proxy_url = "socks5://user:pass@host:port"
+#
+# app = ApplicationBuilder().token(TOKEN).proxy_url(proxy_url).build()
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG

@@ -20,13 +20,12 @@ logger = logging.getLogger(__name__)
 
 
 async def start(update, context):
-    reply_keyboard = [['/Да', '/Нет'],
-                      ['/site', '/work_time']]
+    reply_keyboard = [['Начнём', 'Нет']]
     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     await update.message.reply_text(
         "Я бот-справочник. Какая информация вам нужна?",
-            reply_markup=markup
-        )
+        reply_markup=markup
+    )
     # user = update.effective_user
     # await update.message.reply_html(
     #     rf"Привет {user.mention_html()}! Я эхо-бот. Напишите мне что-нибудь, и я пришлю это назад!",
@@ -38,9 +37,8 @@ async def help_command(update, context):
 
 
 async def photo_command(update, context):
-    conn = sqlite3.connnect('bot.db')
-    cur = conn.cursor()
-    result = cur.execute("SELECT photo FROM party WHERE id = ?", (1,)).fetchone()[0]
+    chat_id = update.message.chat.id
+    await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\др.jpg', caption="Как Вам этот вариант?")
 
 
 def main():

@@ -1,2 +1,0 @@
-TOKEN = '7197643700:AAGDeHtbql7ZykEzxCIEmLaoBDZAGwdlE-I'
-# 5796309424  чат id

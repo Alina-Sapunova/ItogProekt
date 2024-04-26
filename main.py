@@ -45,21 +45,20 @@ async def go_command(update, context):
             """Выберите праздник, для кого, вид подарка, который вам нужен:
             /8march_mom_postcard - 8 марта_маме_открытка
             /8march_mom_wish - 8 марта_маме_пожелание
-            # /8march_sister_postcard - 8 марта_сестре_открытка
-            # /8march_sister_wish - 8 марта_сестре_пожелание
             /23february_dad_postcard-23февраля_папе_открытка
             /23february_dad_wish - 23февраля_папе_пожелание
-            # /23february_brother_postcard-
-            # 23февраля_брату_открытка
-            # /23february_brother_wish-
-            # 23февраля_брату_пожелание""")
-        await update.message.reply_text("""
             /9may - 9 мая
-            /new_year - Новый год
-            /birthday_mom_postcard - День рождения_маме_открытка
-            /birthday_mom_wish - День рождения_маме_пожелание
-            /birthday_dad_postcard - День рождения_папе_открытка
-            /birthday_dad_wish - День рождения_папе_пожелание
+            /new_year - Новый год""")
+
+        await update.message.reply_text(
+            """/birthday_mom_postcard - 
+            День рождения_маме_открытка
+            /birthday_mom_wish - 
+            День рождения_маме_пожелание
+            /birthday_dad_postcard - 
+            День рождения_папе_открытка
+            /birthday_dad_wish - 
+            День рождения_папе_пожелание
             /easter - Пасха""")
 
 

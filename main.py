@@ -41,28 +41,26 @@ async def inline(update, context):
 
 async def go_command(update, context):
     if 'Go' in update.message.text:
-        reply_keyboard = [['/8march ', '/9may'],
-                          ['/23february', '/new_year'],
-                          ['/birthday', '/easter']]
-        markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
         await update.message.reply_text(
-            """Выберите праздник на который нужен подарок:
-            /8march - 8 марта
+            """Выберите праздник, для кого, вид подарка, который вам нужен:
+            /8march_mom_postcard - 8 марта_маме_открытка
+            /8march_mom_wish - 8 марта_маме_пожелание
+            # /8march_sister_postcard - 8 марта_сестре_открытка
+            # /8march_sister_wish - 8 марта_сестре_пожелание
+            /23february_dad_postcard-23февраля_папе_открытка
+            /23february_dad_wish - 23февраля_папе_пожелание
+            # /23february_brother_postcard-
+            # 23февраля_брату_открытка
+            # /23february_brother_wish-
+            # 23февраля_брату_пожелание""")
+        await update.message.reply_text("""
             /9may - 9 мая
-            /23february - 23 Февраля
             /new_year - Новый год
-            /birthday - День рождения
-            /easter - Пасха""",
-            reply_markup=markup
-        )
-
-# async def party(update, context):
-#     reply_keyboard = [['Начнём!', 'Нет']]
-#     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
-#     await update.message.reply_text(
-#         "Привет, я SurpriseBot, помогу с выбором подарка на праздник! Начнём? ",
-#         reply_markup=markup
-#     )
+            /birthday_mom_postcard - День рождения_маме_открытка
+            /birthday_mom_wish - День рождения_маме_пожелание
+            /birthday_dad_postcard - День рождения_папе_открытка
+            /birthday_dad_wish - День рождения_папе_пожелание
+            /easter - Пасха""")
 
 
 async def help_command(update, context):

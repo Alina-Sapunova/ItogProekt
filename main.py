@@ -4,7 +4,7 @@ from telegram.ext import Application, MessageHandler, filters
 from telegram.ext import CommandHandler
 from telegram.ext import ApplicationBuilder
 import sqlite3
-from telegram import ReplyKeyboardMarkup
+from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
 TOKEN = '7197643700:AAGDeHtbql7ZykEzxCIEmLaoBDZAGwdlE-I'
 
@@ -23,17 +23,32 @@ async def start(update, context):
     reply_keyboard = [['Начнём', 'Нет']]
     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     await update.message.reply_text(
-        "Я бот-справочник. Какая информация вам нужна?",
+        "Привет, я SurpriseBot, помогу с выбором подарка на праздник! Начнём? ",
         reply_markup=markup
     )
+    if update.message.text == 'Начнём':
+        await update.message.reply_text('Выберите на какой праздник вам нужен подарок')
+    else:
+        await update.message.reply_text('Пока-пока')
     # user = update.effective_user
     # await update.message.reply_html(
     #     rf"Привет {user.mention_html()}! Я эхо-бот. Напишите мне что-нибудь, и я пришлю это назад!",
     # )
 
 
+async def inline(update, context):
+    await update.message.reply_text(
+        'Subscribe to us on Facebook and Telegram:',
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton(text='Открытки',
+                                  url='https://yandex.ru/images/search?from=tabbar&text=%D0%BF%D0%BE%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BE%D0%BA')],
+            [InlineKeyboardButton(text='Поздавления', url='https://pozdravok.com/pozdravleniya/den-rozhdeniya/')],
+        ])
+    )
+
+
 async def help_command(update, context):
-    await update.message.reply_text("Я пока не умею помогать... Я только ваше эхо.")
+    await update.message.reply_text("fgfg")
 
 
 async def photo_command(update, context):
@@ -46,6 +61,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("photo", photo_command))
+    application.add_handler(CommandHandler("inline", inline))
     application.run_polling()
 
 

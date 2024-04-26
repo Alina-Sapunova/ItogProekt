@@ -41,43 +41,99 @@ async def inline(update, context):
 
 async def go_command(update, context):
     if 'Go' in update.message.text:
+        reply_keyboard = [['/8march ', '/9may'],
+                          ['/23february', '/new_year'],
+                          ['/birthday', '/easter']]
+        markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
         await update.message.reply_text(
-            """Выберите праздник, для кого, вид подарка, который вам нужен:
-            /8march_mom_postcard - 8 марта_маме_открытка
-            /8march_mom_wish - 8 марта_маме_пожелание
-            /23february_dad_postcard-23февраля_папе_открытка
-            /23february_dad_wish - 23февраля_папе_пожелание
+            """Выберите праздник на который нужен подарок:
+            /8march - 8 марта
             /9may - 9 мая
-            /new_year - Новый год""")
-
-        await update.message.reply_text(
-            """/birthday_mom_postcard - 
-            День рождения_маме_открытка
-            /birthday_mom_wish - 
-            День рождения_маме_пожелание
-            /birthday_dad_postcard - 
-            День рождения_папе_открытка
-            /birthday_dad_wish - 
-            День рождения_папе_пожелание
-            /easter - Пасха""")
+            /23february - 23 Февраля
+            /new_year - Новый год
+            /birthday - День рождения
+            /easter - Пасха""",
+            reply_markup=markup
+        )
 
 
 async def help_command(update, context):
-    await update.message.reply_text("fgfg")
+    await update.message.reply_text(
+        """Команды для общения с SurpriseBot:
+        /start - запуск бота
+        /help - помощь
+        /inline - полезные ссылки
+        /Go - начать общение с ботом
+        /No - прекратить общение
+        /8march - 8 марта
+        /9may - 9 мая
+        /23february - 23 Февраля
+        /new_year - Новый год
+        /birthday - День рождения
+        /easter - Пасха""")
 
 
-async def photo_command(update, context):
-    chat_id = update.message.chat.id
-    await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\др.jpg', caption="Как Вам этот вариант?")
+async def photo_eighth_march(update, context):
+    if '8march' in update.message.text:
+        chat_id = update.message.chat.id
+        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\8марта.jpg')
+
+
+async def photo_nine_may(update, context):
+    if '9may' in update.message.text:
+        chat_id = update.message.chat.id
+        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\9мая.jpg')
+
+
+async def photo_february(update, context):
+    if '23february' in update.message.text:
+        chat_id = update.message.chat.id
+        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\февраль.jpeg')
+
+
+async def photo_birthday(update, context):
+    if 'birthday' in update.message.text:
+        chat_id = update.message.chat.id
+        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\др.jpg')
+
+
+async def photo_new_year(update, context):
+    if 'new_year' in update.message.text:
+        chat_id = update.message.chat.id
+        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\новыйгод.jpg')
+
+
+async def photo_easter(update, context):
+    if 'easter' in update.message.text:
+        chat_id = update.message.chat.id
+        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\пасха.jpg')
+
+
+async def check(update, context):
+    sp = ['/start', '/help', '/inline', '/Go', '/8march', '/9may',
+          '/23february', '/new_year', '/birthday', '/easter', '/No']
+    if update.message.text not in sp:
+        await update.message.reply_text("Команда не понятна, попробуй ещё")
+
+
+async def no_command(update, context):
+    await update.message.reply_text("Пока-пока")
 
 
 def main():
     application = Application.builder().token(TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("photo", photo_command))
     application.add_handler(CommandHandler("inline", inline))
     application.add_handler(CommandHandler("Go", go_command))
+    application.add_handler(CommandHandler("8march", photo_eighth_march))
+    application.add_handler(CommandHandler("9may", photo_nine_may))
+    application.add_handler(CommandHandler("23february", photo_february))
+    application.add_handler(CommandHandler("new_year", photo_new_year))
+    application.add_handler(CommandHandler("birthday", photo_birthday))
+    application.add_handler(CommandHandler("easter", photo_easter))
+    application.add_handler(CommandHandler("No", no_command))
+    application.add_handler(MessageHandler(filters.TEXT, check))
     application.run_polling()
 
 

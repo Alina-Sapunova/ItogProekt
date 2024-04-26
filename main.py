@@ -70,7 +70,8 @@ async def help_command(update, context):
         /23february - 23 Февраля
         /new_year - Новый год
         /birthday - День рождения
-        /easter - Пасха""")
+        /easter - Пасха
+        /cancel - сброс команд""")
 
 
 async def photo_eighth_march(update, context):
@@ -111,12 +112,20 @@ async def photo_easter(update, context):
 
 async def check(update, context):
     sp = ['/start', '/help', '/inline', '/Go', '/8march', '/9may',
-          '/23february', '/new_year', '/birthday', '/easter', '/No']
+          '/23february', '/new_year', '/birthday', '/easter', '/No', '/cancel']
     if update.message.text not in sp:
         await update.message.reply_text("Команда не понятна, попробуй ещё")
 
 
 async def no_command(update, context):
+    await update.message.reply_text("Пока-пока")
+
+
+async def cencel(update, context):
+    context.user_data.clear()
+    context.chat_data.clear()
+    await update.message.reply_text("Команды отменены")
+
     await update.message.reply_text("Пока-пока")
 
 
@@ -133,6 +142,7 @@ def main():
     application.add_handler(CommandHandler("birthday", photo_birthday))
     application.add_handler(CommandHandler("easter", photo_easter))
     application.add_handler(CommandHandler("No", no_command))
+    application.add_handler(CommandHandler("cencel", cencel))
     application.add_handler(MessageHandler(filters.TEXT, check))
     application.run_polling()
 

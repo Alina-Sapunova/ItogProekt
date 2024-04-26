@@ -20,17 +20,12 @@ logger = logging.getLogger(__name__)
 
 
 async def start(update, context):
-    reply_keyboard = [['Начнём!', 'Нет']]
+    reply_keyboard = [['/Go', '/No']]
     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     await update.message.reply_text(
         "Привет, я SurpriseBot, помогу с выбором подарка на праздник! Начнём? ",
         reply_markup=markup
     )
-
-    # user = update.effective_user
-    # await update.message.reply_html(
-    #     rf"Привет {user.mention_html()}! Я эхо-бот. Напишите мне что-нибудь, и я пришлю это назад!",
-    # )
 
 
 async def inline(update, context):
@@ -44,10 +39,22 @@ async def inline(update, context):
     )
 
 
-# async def go_command(update, context):
-#     if 'Начать' in update.message.text:
-#         await update.message.reply_text("Выберите праздник на который нужен подарок")
-
+async def go_command(update, context):
+    if 'Go' in update.message.text:
+        reply_keyboard = [['/8march ', '/9may'],
+                          ['/23february', '/new_year'],
+                          ['/birthday', '/easter']]
+        markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
+        await update.message.reply_text(
+            """Выберите праздник на который нужен подарок:
+            /8march - 8 марта
+            /9may - 9 мая
+            /23february - 23 Февраля
+            /new_year - Новый год
+            /birthday - День рождения
+            /easter - Пасха""",
+            reply_markup=markup
+        )
 
 # async def party(update, context):
 #     reply_keyboard = [['Начнём!', 'Нет']]
@@ -73,7 +80,7 @@ def main():
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("photo", photo_command))
     application.add_handler(CommandHandler("inline", inline))
-    application.add_handler(CommandHandler("Начать", go_command))
+    application.add_handler(CommandHandler("Go", go_command))
     application.run_polling()
 
 

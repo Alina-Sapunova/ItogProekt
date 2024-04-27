@@ -136,7 +136,7 @@ def main():
     application.add_handler(CommandHandler("birthday", photo_birthday))
     application.add_handler(CommandHandler("easter", photo_easter))
     application.add_handler(CommandHandler("No", no_command))
-    application.add_handler(CommandHandler("cencel", cencel))
+    application.add_handler(CommandHandler("cancel", cencel))
     application.add_handler(MessageHandler(filters.TEXT, check))
     application.run_polling()
 

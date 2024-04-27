@@ -4,10 +4,10 @@ from telegram.ext import CommandHandler
 import sqlite3
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
-TOKEN = '7197643700:AAGDeHtbql7ZykEzxCIEmLaoBDZAGwdlE-I'
+TOKEN = "7197643700:AAGDeHtbql7ZykEzxCIEmLaoBDZAGwdlE-I"
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG
 )
 
 logger = logging.getLogger(__name__)
@@ -17,16 +17,16 @@ async def start(update, context):
     reply_keyboard = [['/Go', '/No']]
     markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     await update.message.reply_text(
-        "Привет, я SurpriseBot, помогу с выбором подарка на праздник! Начнём? ",
+        "Привет, я SurpriseBot, помогу с выбором подарка на праздник! Начнём?",
         reply_markup=markup
     )
 
 
 async def inline(update, context):
     await update.message.reply_text(
-        'Полезные ссылки',
+        "Полезные ссылки",
         reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton(text='Открытки',
+            [InlineKeyboardButton(text="Открытки",
                                   url='https://yandex.ru/images/search?from=tabbar&text=%D0%BF%D0%BE%D0%B7%D0%B4%D1%80%D0%B0%D0%B2%D0%BE%D0%BA')],
             [InlineKeyboardButton(text='Поздавления', url='https://pozdravok.com/pozdravleniya/den-rozhdeniya/')],
         ])
@@ -35,9 +35,9 @@ async def inline(update, context):
 
 async def go_command(update, context):
     if 'Go' in update.message.text:
-        reply_keyboard = [['/8march ', '/9may'],
-                          ['/23february', '/new_year'],
-                          ['/birthday', '/easter']]
+        reply_keyboard = [["/8march ", "/9may"],
+                          ["/23february", "/new_year"],
+                          ["/birthday", "/easter"]]
         markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
         await update.message.reply_text(
             """Выберите праздник на который нужен подарок:
@@ -71,37 +71,37 @@ async def help_command(update, context):
 async def photo_eighth_march(update, context):
     if '8march' in update.message.text:
         chat_id = update.message.chat.id
-        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\8марта.jpg')
+        await context.bot.send_photo(chat_id=chat_id, photo="C:\ItogProekt\img\march.jpg")
 
 
 async def photo_nine_may(update, context):
     if '9may' in update.message.text:
         chat_id = update.message.chat.id
-        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\9мая.jpg')
+        await context.bot.send_photo(chat_id=chat_id, photo="C:\ItogProekt\img\may.jpg")
 
 
 async def photo_february(update, context):
     if '23february' in update.message.text:
         chat_id = update.message.chat.id
-        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\февраль.jpeg')
+        await context.bot.send_photo(chat_id=chat_id, photo="C:\ItogProekt\img\photo.jpeg")
 
 
 async def photo_birthday(update, context):
     if 'birthday' in update.message.text:
         chat_id = update.message.chat.id
-        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\др.jpg')
+        await context.bot.send_photo(chat_id=chat_id, photo="C:\ItogProekt\img\dr.jpg")
 
 
 async def photo_new_year(update, context):
     if 'new_year' in update.message.text:
         chat_id = update.message.chat.id
-        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\новыйгод.jpg')
+        await context.bot.send_photo(chat_id=chat_id, photo="C:\ItogProekt\img\year.jpg")
 
 
 async def photo_easter(update, context):
     if 'easter' in update.message.text:
         chat_id = update.message.chat.id
-        await context.bot.send_photo(chat_id=chat_id, photo='C:\ItogProekt\img\пасха.jpg')
+        await context.bot.send_photo(chat_id=chat_id, photo="C:\ItogProekt\img\easter.jpg")
 
 
 async def check(update, context):
@@ -115,12 +115,10 @@ async def no_command(update, context):
     await update.message.reply_text("Пока-пока")
 
 
-async def cencel(update, context):
+async def cancel(update, context):
     context.user_data.clear()
     context.chat_data.clear()
     await update.message.reply_text("Команды отменены")
-
-    await update.message.reply_text("Пока-пока")
 
 
 def main():
@@ -136,7 +134,7 @@ def main():
     application.add_handler(CommandHandler("birthday", photo_birthday))
     application.add_handler(CommandHandler("easter", photo_easter))
     application.add_handler(CommandHandler("No", no_command))
-    application.add_handler(CommandHandler("cancel", cencel))
+    application.add_handler(CommandHandler("cancel", cancel))
     application.add_handler(MessageHandler(filters.TEXT, check))
     application.run_polling()
 

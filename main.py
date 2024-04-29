@@ -1,5 +1,5 @@
 import logging
-from telegram.ext import Application, MessageHandler, filters
+from telegram.ext import Application
 from telegram.ext import CommandHandler
 import sqlite3
 from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
@@ -64,8 +64,7 @@ async def help_command(update, context):
         /23february - 23 Февраля
         /new_year - Новый год
         /birthday - День рождения
-        /easter - Пасха
-        /cancel - сброс команд""")
+        /easter - Пасха""")
 
 
 async def photo_eighth_march(update, context):
